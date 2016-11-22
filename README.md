@@ -51,7 +51,7 @@ If you discover any security related issues, please email githubissues@schulze.c
 - [Felix Schulze][link-author]
 - [All Contributors][link-contributors]
 
-A big thank to [Taylor Otwell](https://github.com/taylorotwell) for Laravel.
+A great thanks to [Taylor Otwell](https://github.com/taylorotwell) for Laravel.
 
 ## License
 
