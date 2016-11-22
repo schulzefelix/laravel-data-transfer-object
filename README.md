@@ -1,16 +1,14 @@
-# laravel-data-transfer-object
+# Super Charge A Data Transfer Object With Eloquent Magic
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Latest Version](https://img.shields.io/github/release/schulzefelix/laravel-stat-search-analytics.svg?style=flat-square)](https://github.com/schulzefelix/laravel-stat-search-analytics/releases)
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
+[![StyleCI](https://styleci.io/repos/72838426/shield)](https://styleci.io/repos/72838426)
+[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Note:** Replace ```Felix Schulze``` ```schulzefelix``` ```https://schulze.co``` ```githubissues@schulze.co``` ```schulzefelix``` ```laravel-data-transfer-object``` ```Brings Laravel Attribute Casting and Date Mutators to objects.``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can run `$ php prefill.php` in the command line to make all replacements at once. Delete the file prefill.php as well.
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+Brings Laravel Attribute Casting and Date Mutators to objects.
 
 ## Install
 
@@ -23,8 +21,11 @@ $ composer require schulzefelix/laravel-data-transfer-object
 ## Usage
 
 ``` php
-$skeleton = new SchulzeFelix\DTO();
-echo $skeleton->echoPhrase('Hello, League!');
+$object = new DataTransferObject(['name' => 'Cheese Cake', 'date' => '2016-11-22']);
+echo $object->name;
+echo $object->date; // Returns A Carbon Instance
+
+[to be continued]
 ```
 
 ## Change log
@@ -34,7 +35,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ## Testing
 
 ``` bash
-$ composer test
+$ vendor/bin/phpunit
 ```
 
 ## Contributing
@@ -49,6 +50,8 @@ If you discover any security related issues, please email githubissues@schulze.c
 
 - [Felix Schulze][link-author]
 - [All Contributors][link-contributors]
+
+A big thank to [Taylor Otwell](https://github.com/taylorotwell) for Laravel.
 
 ## License
 
