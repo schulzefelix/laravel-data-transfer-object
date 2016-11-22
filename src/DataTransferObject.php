@@ -144,7 +144,6 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
         if (method_exists(self::class, $key)) {
             return;
         }
-
     }
 
     /**
@@ -191,7 +190,7 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
     public function fill(array $attributes)
     {
         foreach ($attributes as $key => $value) {
-                $this->setAttribute($key, $value);
+            $this->setAttribute($key, $value);
         }
         return $this;
     }
@@ -427,7 +426,6 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
         // the database connection and use that format to create the Carbon object
         // that is returned back out to the developers after we convert it here.
         return Carbon::createFromFormat($this->getDateFormat(), $value);
-
     }
 
     /**
@@ -750,5 +748,4 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
     {
         unset($this->$offset);
     }
-
 }
