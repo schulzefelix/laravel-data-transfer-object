@@ -164,10 +164,11 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
         $this->assertNull($array['datetimeAttribute']);
         $this->assertNull($array['timestampAttribute']);
     }
-
 }
 
-class DataTransferObjectStub extends DataTransferObject {}
+class DataTransferObjectStub extends DataTransferObject
+{
+}
 
 class EloquentModelCastingStub extends DataTransferObject
 {
