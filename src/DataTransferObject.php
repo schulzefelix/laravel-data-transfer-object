@@ -560,9 +560,34 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
      */
     public function toArray()
     {
-        return $this->attributesToArray();
+        $attributes = $this->attributesToArray();
+
+        return array_merge($attributes, $this->nestedObjectsToArray());
     }
 
+    /**
+     * Get the object's nested objects in array form.
+     *
+     * @return array
+     */
+    public function nestedObjectsToArray()
+    {
+        $attributes = [];
+
+        foreach ($this->getAttributes() as $key => $value) {
+            // If the values implements the Arrayable interface we can just call this
+            // toArray method on the instances which will convert both objects and
+            // collections to their proper array form and we'll set the values.
+            if ($value instanceof Arrayable) {
+                $attributes[$key] = $value->toArray();
+            }
+            if(is_array($value)) {
+                $attributes[$key] = collect($value)->toArray();
+            }
+        }
+
+        return $attributes;
+    }
     /**
      * Convert the object's attributes to an array.
      *
@@ -748,4 +773,5 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
     {
         unset($this->$offset);
     }
+
 }

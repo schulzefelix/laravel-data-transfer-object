@@ -59,7 +59,7 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Carbon\Carbon', $object->updated_at);
     }
 
-    public function testModelAttributesAreCastedWhenPresentInCastsArray()
+    public function testObjectAttributesAreCastedWhenPresentInCastsArray()
     {
         $object = new EloquentModelCastingStub;
         $object->setDateFormat('Y-m-d H:i:s');
@@ -114,21 +114,21 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(-14173440, $arr['timestampAttribute']);
     }
 
-    public function testModelAttributeCastingPreservesNull()
+    public function testObjectAttributeCastingPreservesNull()
     {
-        $model = new EloquentModelCastingStub;
-        $model->intAttribute = null;
-        $model->floatAttribute = null;
-        $model->stringAttribute = null;
-        $model->boolAttribute = null;
-        $model->booleanAttribute = null;
-        $model->objectAttribute = null;
-        $model->arrayAttribute = null;
-        $model->jsonAttribute = null;
-        $model->dateAttribute = null;
-        $model->datetimeAttribute = null;
-        $model->timestampAttribute = null;
-        $attributes = $model->getAttributes();
+        $object = new EloquentModelCastingStub;
+        $object->intAttribute = null;
+        $object->floatAttribute = null;
+        $object->stringAttribute = null;
+        $object->boolAttribute = null;
+        $object->booleanAttribute = null;
+        $object->objectAttribute = null;
+        $object->arrayAttribute = null;
+        $object->jsonAttribute = null;
+        $object->dateAttribute = null;
+        $object->datetimeAttribute = null;
+        $object->timestampAttribute = null;
+        $attributes = $object->getAttributes();
         $this->assertNull($attributes['intAttribute']);
         $this->assertNull($attributes['floatAttribute']);
         $this->assertNull($attributes['stringAttribute']);
@@ -140,18 +140,18 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
         $this->assertNull($attributes['dateAttribute']);
         $this->assertNull($attributes['datetimeAttribute']);
         $this->assertNull($attributes['timestampAttribute']);
-        $this->assertNull($model->intAttribute);
-        $this->assertNull($model->floatAttribute);
-        $this->assertNull($model->stringAttribute);
-        $this->assertNull($model->boolAttribute);
-        $this->assertNull($model->booleanAttribute);
-        $this->assertNull($model->objectAttribute);
-        $this->assertNull($model->arrayAttribute);
-        $this->assertNull($model->jsonAttribute);
-        $this->assertNull($model->dateAttribute);
-        $this->assertNull($model->datetimeAttribute);
-        $this->assertNull($model->timestampAttribute);
-        $array = $model->toArray();
+        $this->assertNull($object->intAttribute);
+        $this->assertNull($object->floatAttribute);
+        $this->assertNull($object->stringAttribute);
+        $this->assertNull($object->boolAttribute);
+        $this->assertNull($object->booleanAttribute);
+        $this->assertNull($object->objectAttribute);
+        $this->assertNull($object->arrayAttribute);
+        $this->assertNull($object->jsonAttribute);
+        $this->assertNull($object->dateAttribute);
+        $this->assertNull($object->datetimeAttribute);
+        $this->assertNull($object->timestampAttribute);
+        $array = $object->toArray();
         $this->assertNull($array['intAttribute']);
         $this->assertNull($array['floatAttribute']);
         $this->assertNull($array['stringAttribute']);
@@ -164,6 +164,51 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
         $this->assertNull($array['datetimeAttribute']);
         $this->assertNull($array['timestampAttribute']);
     }
+
+    public function testNestedObjectGetConvertedToArray()
+    {
+        $object = new DataTransferObjectStub;
+        $phone = new DataTransferObjectStub;
+        $account1 = new DataTransferObjectStub;
+        $account2 = new DataTransferObjectStub;
+        $creditCard = new DataTransferObjectStub;
+
+        $creditCard->setRawAttributes([
+            'type' => 'Visa',
+            'number' => '1111 1111 111',
+        ]);
+        $account1->setRawAttributes([
+            'company' => 'Starbucks',
+            'balance' => 25.45,
+            'cards' => [$creditCard]
+        ]);
+        $account2->setRawAttributes([
+            'company' => 'Apple',
+            'balance' => 300,
+            'cards' => null,
+        ]);
+        $phone->setRawAttributes([
+            'company' => 'Apple',
+            'version' => '6s',
+            'color' => 'black',
+        ]);
+
+        $object->setRawAttributes([
+            'name' => '2012-12-04',
+            'accounts' => collect([$account1, $account2]),
+            'phone' => $phone,
+        ]);
+
+        $this->assertInternalType('array', $object->toArray());
+        $this->assertInternalType('array', $object->toArray()['accounts']);
+        $this->assertInternalType('array', $object->toArray()['accounts'][0]);
+        $this->assertInternalType('array', $object->toArray()['accounts'][1]);
+        $this->assertNull($object->toArray()['accounts'][1]['cards']);
+        $this->assertInternalType('array', $object->toArray()['phone']);
+        $this->assertInternalType('array', $object->toArray()['accounts'][0]['cards'][0]);
+
+    }
+
 }
 
 class DataTransferObjectStub extends DataTransferObject
