@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "SchulzeFelix\\DTO\\": "src"
+            "SchulzeFelix\\DataTransferObject\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SchulzeFelix\\DTO\\Tests\\": "tests"
+            "SchulzeFelix\\DataTransferObject\\Tests\\": "tests"
         }
     },
     "scripts": {

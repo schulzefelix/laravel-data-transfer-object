@@ -1,9 +1,9 @@
 <?php
 
-namespace SchulzeFelix\DTO\Tests\Unit;
+namespace SchulzeFelix\DataTransferObject\Tests\Unit;
 
 use PHPUnit_Framework_TestCase;
-use SchulzeFelix\DTO\DataTransferObject;
+use SchulzeFelix\DataTransferObject\DataTransferObject;
 use stdClass;
 
 class DataTransferObjectTest extends PHPUnit_Framework_TestCase

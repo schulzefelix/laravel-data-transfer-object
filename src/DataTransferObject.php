@@ -1,4 +1,4 @@
-<?php namespace SchulzeFelix\DTO;
+<?php namespace SchulzeFelix\DataTransferObject;
 
 use ArrayAccess;
 use Carbon\Carbon;
