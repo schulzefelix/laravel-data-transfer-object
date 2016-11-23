@@ -1,10 +1,9 @@
 # Super Charge A Data Transfer Object With Eloquent Magic
 
-[![Latest Version](https://img.shields.io/github/release/schulzefelix/laravel-stat-search-analytics.svg?style=flat-square)](https://github.com/schulzefelix/laravel-stat-search-analytics/releases)
+[![Latest Version](https://img.shields.io/github/release/schulzefelix/laravel-data-transfer-object.svg?style=flat-square)](https://github.com/schulzefelix/laravel-data-transfer-object/releases)
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![StyleCI](https://styleci.io/repos/72838426/shield)](https://styleci.io/repos/72838426)
+[![StyleCI](https://styleci.io/repos/74488171/shield)](https://styleci.io/repos/74488171)
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 
@@ -61,7 +60,6 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/schulzefelix/laravel-data-transfer-object/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/schulzefelix/laravel-data-transfer-object.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/schulzefelix/laravel-data-transfer-object.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/schulzefelix/laravel-data-transfer-object.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/schulzefelix/laravel-data-transfer-object
