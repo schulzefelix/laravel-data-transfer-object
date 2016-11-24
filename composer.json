@@ -1,9 +1,16 @@
 {
     "name": "schulzefelix/laravel-data-transfer-object",
     "type": "library",
-    "description": "Brings Laravel Attribute Casting and Date Mutators to objects.",
+    "description": "Data Transfer Objects with Attribute Casting and Date Mutators.",
     "keywords": [
         "schulzefelix",
+        "felix",
+        "dto",
+        "data transfer object",
+        "attribute casting",
+        "mutators",
+        "accessors",
+        "serialization",
         "laravel-data-transfer-object"
     ],
     "homepage": "https://github.com/schulzefelix/laravel-data-transfer-object",
