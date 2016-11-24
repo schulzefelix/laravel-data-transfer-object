@@ -206,9 +206,7 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
         $this->assertNull($object->toArray()['accounts'][1]['cards']);
         $this->assertInternalType('array', $object->toArray()['phone']);
         $this->assertInternalType('array', $object->toArray()['accounts'][0]['cards'][0]);
-
     }
-
 }
 
 class DataTransferObjectStub extends DataTransferObject
