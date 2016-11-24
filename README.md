@@ -19,13 +19,157 @@ $ composer require schulzefelix/laravel-data-transfer-object
 
 ## Usage
 
-``` php
-$object = new DataTransferObject(['name' => 'Cheese Cake', 'date' => '2016-11-22']);
-echo $object->name;
-echo $object->date; // Returns A Carbon Instance
+- [Introduction](#introduction)
+- [Accessors & Mutators](#accessors-and-mutators)
+    - [Defining An Accessor](#defining-an-accessor)
+    - [Defining A Mutator](#defining-a-mutator)
+- [Date Mutators](#date-mutators)
+- [Attribute Casting](#attribute-casting)
+- [Serializing Objects & Collections](#serializing-objects-and-collections)
+    - [Serializing To Arrays](#serializing-to-arrays)
+    - [Serializing To JSON](#serializing-to-json)
 
-[to be continued]
-```
+<a name="introduction"></a>
+## Introduction
+
+Accessors and mutators allow you to format attribute values when you retrieve or set them on object instances.
+
+In addition to custom accessors and mutators, it can also automatically cast date fields to [Carbon](https://github.com/briannesbitt/Carbon) instances.
+
+<a name="accessors-and-mutators"></a>
+## Accessors & Mutators
+
+<a name="defining-an-accessor"></a>
+### Defining An Accessor
+
+To define an accessor, create a `getFooAttribute` method on your object where `Foo` is the "studly" cased name of the column you wish to access. In this example, we'll define an accessor for the `first_name` attribute. The accessor will automatically be called when attempting to retrieve the value of the `slug` attribute:
+
+    <?php
+
+    namespace App;
+
+    use SchulzeFelix\DataTransferObject\DataTransferObject;
+
+    class Project extends DataTransferObject
+    {
+        /**
+         * Get the objects URL friendly slug.
+         *
+         * @return string
+         */
+        public function getSlugAttribute()
+        {
+            return str_slug($value);
+        }
+    }
+
+
+<a name="defining-a-mutator"></a>
+### Defining A Mutator
+
+To define a mutator, define a `setFooAttribute` method on your object where `Foo` is the "studly" cased name of the column you wish to access.
+
+    <?php
+
+    namespace App;
+
+    use SchulzeFelix\DataTransferObject\DataTransferObject;
+
+    class Project extends DataTransferObject
+    {
+        /**
+         * Set the objects's title.
+         *
+         * @param  string  $value
+         * @return void
+         */
+        public function serTitleAttribute($value)
+        {
+            $this->attributes['title'] = title_case($value);
+        }
+    }
+
+<a name="date-mutators"></a>
+## Date Mutators
+
+By default, it will convert the `created_at` and `updated_at` columns to instances of [Carbon](https://github.com/briannesbitt/Carbon), which extends the PHP `DateTime` class to provide an assortment of helpful methods. You may customize which dates are automatically mutated:
+
+    <?php
+
+    namespace App;
+
+    use SchulzeFelix\DataTransferObject\DataTransferObject;
+
+    class Project extends DataTransferObject
+    {
+        /**
+         * The attributes that should be mutated to dates.
+         *
+         * @var array
+         */
+        protected $dates = [
+            'date',
+            'deleted_at'
+        ];
+    }
+
+
+As noted above, when retrieving attributes that are listed in your `$dates` property, they will automatically be cast to [Carbon](https://github.com/briannesbitt/Carbon) instances, allowing you to use any of Carbon's methods on your attributes:
+
+    return $project->deleted_at->getTimestamp();
+
+
+<a name="attribute-casting"></a>
+## Attribute Casting
+
+The `$casts` property on your object provides a convenient method of converting attributes to common data types. The `$casts` property should be an array where the key is the name of the attribute being cast and the value is the type you wish to cast the attribute to. The supported cast types are: `integer`, `real`, `float`, `double`, `string`, `boolean`, `object`, `array`, `collection`, `date`, `datetime`, and `timestamp`.
+
+For example, let's cast the `is_index` attribute, which was assigned as string to a boolean value:
+
+    <?php
+
+    namespace App;
+
+    use SchulzeFelix\DataTransferObject\DataTransferObject;
+
+    class Project extends DataTransferObject
+    {
+        /**
+         * The attributes that should be casted to native types.
+         *
+         * @var array
+         */
+        protected $casts = [
+            'is_index' => 'boolean',
+        ];
+    }
+
+Now the `is_index` attribute will always be cast to a boolean when you access it, even if the underlying value was set as integer or string:
+
+    if ($project->is_index) {
+        //
+    }
+
+<a name="serializing-objects-and-collections"></a>
+## Serializing Objects & Collections
+
+<a name="serializing-to-arrays"></a>
+### Serializing To Arrays
+
+To convert a object and its nested objects and collections to an array, you should use the `toArray` method. This method is recursive, so all attributes will be converted to arrays:
+
+    return $project->toArray();
+
+<a name="serializing-to-json"></a>
+### Serializing To JSON
+
+To convert a object to JSON, you should use the `toJson` method. Like `toArray`, the `toJson` method is recursive, so all attributes and nested objects will be converted to JSON:
+
+    return $project->toJson();
+
+Alternatively, you may cast a object or collection to a string, which will automatically call the `toJson` method on the object or collection:
+
+    return (string) $project;
 
 ## Change log
 
@@ -48,9 +192,12 @@ If you discover any security related issues, please email githubissues@schulze.c
 ## Credits
 
 - [Felix Schulze][link-author]
-- [All Contributors][link-contributors]
 
-A great thanks to [Taylor Otwell](https://github.com/taylorotwell) for Laravel.
+A great thanks to [Taylor Otwell](https://github.com/taylorotwell) and all contributors for Laravel.
+
+Modified source comes from the [Eloquent Model](https://github.com/laravel/framework/blob/5.3/src/Illuminate/Database/Eloquent/Model.php).
+
+Docs modified from [Laravel Docs](https://github.com/laravel/docs).
 
 ## License
 
