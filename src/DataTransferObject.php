@@ -581,7 +581,7 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
             if ($value instanceof Arrayable) {
                 $attributes[$key] = $value->toArray();
             }
-            if(is_array($value)) {
+            if (is_array($value)) {
                 $attributes[$key] = collect($value)->toArray();
             }
         }
@@ -773,5 +773,4 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
     {
         unset($this->$offset);
     }
-
 }
