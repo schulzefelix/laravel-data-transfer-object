@@ -1,4 +1,4 @@
-# Data Transfer Objects with Attribute Casting and Date Mutators
+# Laravel Data Transfer Objects
 
 [![Latest Version](https://img.shields.io/github/release/schulzefelix/laravel-data-transfer-object.svg?style=flat-square)](https://github.com/schulzefelix/laravel-data-transfer-object/releases)
 [![Software License][ico-license]](LICENSE.md)
