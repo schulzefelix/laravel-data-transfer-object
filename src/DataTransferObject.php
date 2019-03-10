@@ -1,16 +1,18 @@
-<?php namespace SchulzeFelix\DataTransferObject;
+<?php
+
+namespace SchulzeFelix\DataTransferObject;
 
 use ArrayAccess;
-use Carbon\CarbonInterface;
+use JsonSerializable;
 use DateTimeInterface;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Str;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection as BaseCollection;
-use JsonSerializable;
 
 abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
 {
@@ -187,13 +189,13 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
      *
      * @param  array  $attributes
      * @return $this
-     *
      */
     public function fill(array $attributes)
     {
         foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
         }
+
         return $this;
     }
 
@@ -392,6 +394,7 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
      * @param  mixed  $value
      * @return \Carbon\Carbon
      */
+
     /**
      * Return a timestamp as DateTime object.
      *
@@ -614,6 +617,7 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
 
         return $attributes;
     }
+
     /**
      * Convert the object's attributes to an array.
      *

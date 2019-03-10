@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use SchulzeFelix\DataTransferObject\DataTransferObject;
 use stdClass;
 use Tests\TestCase;
+use SchulzeFelix\DataTransferObject\DataTransferObject;
 
 class DataTransferObjectTest extends TestCase
 {
@@ -180,7 +180,7 @@ class DataTransferObjectTest extends TestCase
         $account1->setRawAttributes([
             'company' => 'Starbucks',
             'balance' => 25.45,
-            'cards' => [$creditCard]
+            'cards' => [$creditCard],
         ]);
         $account2->setRawAttributes([
             'company' => 'Apple',
@@ -228,7 +228,6 @@ class EloquentModelCastingStub extends DataTransferObject
         'datetimeAttribute' => 'datetime',
         'timestampAttribute' => 'timestamp',
     ];
-
 
     public function jsonAttributeValue()
     {
