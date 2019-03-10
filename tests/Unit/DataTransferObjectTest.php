@@ -1,12 +1,12 @@
 <?php
 
-namespace SchulzeFelix\DataTransferObject\Tests\Unit;
+namespace Tests\Unit;
 
-use PHPUnit_Framework_TestCase;
-use SchulzeFelix\DataTransferObject\DataTransferObject;
 use stdClass;
+use Tests\TestCase;
+use SchulzeFelix\DataTransferObject\DataTransferObject;
 
-class DataTransferObjectTest extends PHPUnit_Framework_TestCase
+class DataTransferObjectTest extends TestCase
 {
     public function testAttributeManipulation()
     {
@@ -76,14 +76,14 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
         $object->dateAttribute = '1969-07-20';
         $object->datetimeAttribute = '1969-07-20 22:56:00';
         $object->timestampAttribute = '1969-07-20 22:56:00';
-        $this->assertInternalType('int', $object->intAttribute);
-        $this->assertInternalType('float', $object->floatAttribute);
-        $this->assertInternalType('string', $object->stringAttribute);
-        $this->assertInternalType('boolean', $object->boolAttribute);
-        $this->assertInternalType('boolean', $object->booleanAttribute);
-        $this->assertInternalType('object', $object->objectAttribute);
-        $this->assertInternalType('array', $object->arrayAttribute);
-        $this->assertInternalType('array', $object->jsonAttribute);
+        $this->assertIsInt($object->intAttribute);
+        $this->assertIsFloat($object->floatAttribute);
+        $this->assertIsString($object->stringAttribute);
+        $this->assertIsBool($object->boolAttribute);
+        $this->assertIsBool($object->booleanAttribute);
+        $this->assertIsObject($object->objectAttribute);
+        $this->assertIsArray($object->arrayAttribute);
+        $this->assertIsArray($object->jsonAttribute);
         $this->assertTrue($object->boolAttribute);
         $this->assertFalse($object->booleanAttribute);
         $this->assertEquals($obj, $object->objectAttribute);
@@ -96,14 +96,14 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('1969-07-20 22:56:00', $object->datetimeAttribute->toDateTimeString());
         $this->assertEquals(-14173440, $object->timestampAttribute);
         $arr = $object->toArray();
-        $this->assertInternalType('int', $arr['intAttribute']);
-        $this->assertInternalType('float', $arr['floatAttribute']);
-        $this->assertInternalType('string', $arr['stringAttribute']);
-        $this->assertInternalType('boolean', $arr['boolAttribute']);
-        $this->assertInternalType('boolean', $arr['booleanAttribute']);
-        $this->assertInternalType('object', $arr['objectAttribute']);
-        $this->assertInternalType('array', $arr['arrayAttribute']);
-        $this->assertInternalType('array', $arr['jsonAttribute']);
+        $this->assertIsInt($arr['intAttribute']);
+        $this->assertIsFloat($arr['floatAttribute']);
+        $this->assertIsString($arr['stringAttribute']);
+        $this->assertIsBool($arr['boolAttribute']);
+        $this->assertIsBool($arr['booleanAttribute']);
+        $this->assertIsObject($arr['objectAttribute']);
+        $this->assertIsArray($arr['arrayAttribute']);
+        $this->assertIsArray($arr['jsonAttribute']);
         $this->assertTrue($arr['boolAttribute']);
         $this->assertFalse($arr['booleanAttribute']);
         $this->assertEquals($obj, $arr['objectAttribute']);
@@ -180,7 +180,7 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
         $account1->setRawAttributes([
             'company' => 'Starbucks',
             'balance' => 25.45,
-            'cards' => [$creditCard]
+            'cards' => [$creditCard],
         ]);
         $account2->setRawAttributes([
             'company' => 'Apple',
@@ -199,13 +199,13 @@ class DataTransferObjectTest extends PHPUnit_Framework_TestCase
             'phone' => $phone,
         ]);
 
-        $this->assertInternalType('array', $object->toArray());
-        $this->assertInternalType('array', $object->toArray()['accounts']);
-        $this->assertInternalType('array', $object->toArray()['accounts'][0]);
-        $this->assertInternalType('array', $object->toArray()['accounts'][1]);
+        $this->assertIsArray($object->toArray());
+        $this->assertIsArray($object->toArray()['accounts']);
+        $this->assertIsArray($object->toArray()['accounts'][0]);
+        $this->assertIsArray($object->toArray()['accounts'][1]);
         $this->assertNull($object->toArray()['accounts'][1]['cards']);
-        $this->assertInternalType('array', $object->toArray()['phone']);
-        $this->assertInternalType('array', $object->toArray()['accounts'][0]['cards'][0]);
+        $this->assertIsArray($object->toArray()['phone']);
+        $this->assertIsArray($object->toArray()['accounts'][0]['cards'][0]);
     }
 }
 
@@ -228,7 +228,6 @@ class EloquentModelCastingStub extends DataTransferObject
         'datetimeAttribute' => 'datetime',
         'timestampAttribute' => 'timestamp',
     ];
-
 
     public function jsonAttributeValue()
     {
