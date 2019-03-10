@@ -63,7 +63,6 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
      */
     const UPDATED_AT = 'updated_at';
 
-
     /**
      * Create a new Data Transfer Object instance.
      *
