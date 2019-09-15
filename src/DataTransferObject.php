@@ -544,7 +544,7 @@ abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, J
      */
     public function fillJsonAttribute($key, $value)
     {
-        list($key, $path) = explode('->', $key, 2);
+        [$key, $path] = explode('->', $key, 2);
 
         $arrayValue = isset($this->attributes[$key]) ? $this->fromJson($this->attributes[$key]) : [];
 
