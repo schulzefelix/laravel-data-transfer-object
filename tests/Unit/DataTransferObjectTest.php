@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
+use SchulzeFelix\DataTransferObject\DataTransferObject;
 use stdClass;
 use Tests\TestCase;
-use SchulzeFelix\DataTransferObject\DataTransferObject;
 
 class DataTransferObjectTest extends TestCase
 {
