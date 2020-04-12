@@ -3,16 +3,16 @@
 namespace SchulzeFelix\DataTransferObject;
 
 use ArrayAccess;
-use JsonSerializable;
-use DateTimeInterface;
 use Carbon\CarbonInterface;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Contracts\Support\Jsonable;
+use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection as BaseCollection;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Str;
+use JsonSerializable;
 
 abstract class DataTransferObject implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
 {
